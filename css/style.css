@@ -1,0 +1,343 @@
+* {
+  box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Volkhov', Georgia, serif;
+  font-size: 16px;
+}
+
+img {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+}
+/* GRID GERAL */
+
+.estrutura {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 3fr 300px;
+  /* primeira coluna eu entendo que por serem icones não quero 
+  que diminua muito então, coloco como minimo 160px e no maximo 1fr*/
+  /* a segunda coluna eu coloco 3fr pq quero que ela fique pelo menos 3 vezes 
+  que a primeira caso consiga */
+  /* a terceira coluna coloquei 300px pq sim */
+  grid-template-areas: 
+  "header header header"
+  "sidenav content anuncios"
+  "footer footer footer";
+}
+
+@media(max-width:1200px){
+  .estrutura {
+    grid-template-areas: 
+    "header header header"
+    "sidenav content content"
+    "sidenva anuncios anuncios "
+    "footer footer footer"
+    ;
+  }
+}
+
+@media(max-width:760px){
+  .estrutura {
+    grid-template-columns: 100%;
+    grid-template-areas: 
+    "header"
+    "sidenav"
+    "content"
+    "anuncios"
+    "footer"
+    ;
+  }
+}
+
+
+.header {
+  grid-area: header;
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header nav a {
+  display: block;
+  padding: 10px;
+  color: white;
+  font-size: 1.125rem;
+  background: rgba(0, 0, 0, .1);
+  border-radius: 5px;
+  transition: 01.s;
+}
+
+.header nav a:hover {
+  background: rgba(0, 0, 0, .5);
+}
+
+.header li + li { /* todo li que vier após outro li recebe essa a propriedade css*/
+  margin-left: 30px;
+}
+
+.logo {
+  max-width: 200px;
+}
+
+@media(max-width: 760px) {
+  .header {
+    grid-template-columns: auto;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .header nav a {
+    font-size: 1rem;
+  }
+  .header li + li { /* todo li que vier após outro li recebe essa a propriedade css*/
+    margin-left: 10px;
+  }
+}
+
+/* SIDENAV*/
+
+.sidenav {
+  grid-area: sidenav;
+  background: #fafbfc;
+  padding: 30px;
+}
+
+.sidenav li a {
+  display: block;
+  min-width: 100px;
+  max-width: 150px;
+  margin : 0 auto 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px rgba(44,44,44,0.15);
+  transition: .1s ease-out;
+}
+
+.sidenav li a:hover {
+  background: #B07DFB;
+}
+
+@keyframes seta {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+@media (max-width:760px){
+  .sidenav {
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .sidenav::after {
+    content: '⭢';
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    color: rgba(0, 0, 0, .3);
+    animation: seta .5s ease-in 0s infinite alternate ;
+
+  }
+  .sidenav ul {
+    display: flex;
+  }
+  .sidenav li {
+    flex: 1 0 60px;
+  }
+  .sidenav {
+    padding: 0 30px;
+  }
+  .sidenav li a {
+    margin: 30px 30px 30px 0;
+  }
+}
+
+/* CONTENT */
+
+.content {
+  grid-area: content;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+
+@media  (max-width: 600px) {
+  .content {
+    grid-template-columns: auto;
+  }
+}
+
+.col-wide {
+  grid-column: 1 / -1;
+}
+
+.imagem-1 {
+  grid-row: span 2;
+  align-self: end;
+}
+
+.imagem-2 {
+  align-self: end;
+}
+
+/* ESTILOS CONTENT*/
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  letter-spacing: -0.005rem;
+  color: rgba(0, 0, 0, .7);
+}
+
+.informacoes p + p { 
+  margin-top: 30px;
+}
+
+/* TITULO*/
+
+.titulo {
+  color: #b07dfb;
+}
+
+.titulo h1 {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.titulo span {
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* CARACTERISTICAS*/
+
+.caracter {
+  display: flex;
+  align-items: flex-start;
+}
+
+.caracter > div {
+  width: 80px;
+  text-align: center;
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px rgba(44,44,44,0.15); 
+  position: relative;
+}
+
+.caracter > div:first-child {
+  margin-right: 30px;
+}
+
+.caracter span {
+  display: block;
+  color: #B07DFB;
+}
+
+.numero {
+  font-size: 3rem;
+  line-height: 1;
+  margin: 10px auto;
+}
+
+.rotulo {
+  background: white;
+  border-radius: 0 0 5px 5px ;
+  padding: 5px 0;
+  position: relative;
+  top: 2px;
+}
+
+.destaque {
+  font-size: .875rem;
+  color: #B07DFB;
+  max-width: 16rem;
+}
+
+.citacao,.atributos {
+  align-self: start;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px  rgba(44,44,44,.1);
+  background: linear-gradient(135deg,#8844ee, #B07DFB); 
+}
+
+.citacao p {
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  color: white;
+}
+
+.atributos li {
+  color: white;
+  font-family: Courier, monospace;
+  font-size: 1.125rem;
+  padding: 15px;
+}
+
+.atributos li+li {
+  border-top: 2px solid #B07DFB;
+}
+
+
+/*ANUNCIOS*/
+
+.anuncios {
+  grid-area: anuncios;
+  background: #fafbfc;
+  display: grid;
+  align-content: start;
+  padding: 30px;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /* Tenta colocar o maximo de colunas que der de acordo com essa especificação acima*/
+}
+
+/*FOOTER*/
+
+.footer {
+  grid-area: footer;
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
+}
+
+.footer p {
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+
+
